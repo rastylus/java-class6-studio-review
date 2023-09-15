@@ -1,30 +1,21 @@
 import questions.*;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Scanner;
 
-public class Survey {
+public class Survey extends Quiz {
 
-    private final ArrayList<Question> questions = new ArrayList<>();
-    private final ArrayList<String> userResponses = new ArrayList<>();
+    private final ArrayList<String> allResponses = new ArrayList<>();
 
-    public ArrayList<Question> getQuestions() {
-        return questions;
+    ArrayList<String> getAllResponses() {
+        return allResponses;
     }
 
-    ArrayList<String> getUserResponses() {
-        return userResponses;
-    }
-
-    public void addQuestions(Question[] questionArray) {
-        Collections.addAll(questions, questionArray);
-    }
-
+    @Override
     public void run() {
         Scanner input = new Scanner(System.in);
 
-        for (Question question : questions) {
+        for (Question question : getQuestions()) {
             int i=0;
             System.out.println(question);
             do {
@@ -38,12 +29,15 @@ public class Survey {
                     }
                     System.out.println("Got it!");
 
+                    String content;
                     if (question instanceof ShortAnswer || question instanceof Paragraph || question instanceof LinearScale) {
-                        userResponses.add(userResponse);
+                        content = userResponse;
                     } else {
                         int userRespNum = Integer.parseInt(userResponse);
-                        userResponses.add(question.getChoiceMap().get(userRespNum).getContent());
+                        content = question.getChoiceMap().get(userRespNum).getContent();
                     }
+                    String resp = question.getQuestion() + ": " + content;
+                    allResponses.add(resp);
                     i++;
 
                     if (question instanceof Checkbox && i < question.getMaxResponses()) {
