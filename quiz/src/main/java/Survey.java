@@ -32,7 +32,7 @@ public class Survey {
                 if (userResponse.equalsIgnoreCase("done")) {
                     break;
                 } else {
-                    while (!userResponse.equalsIgnoreCase("done") && question.isInvalid(userResponse)) {
+                    while (question.isInvalid(userResponse)) {
                         System.out.println(System.lineSeparator() + "That response is invalid. Please try again: ");
                         userResponse = input.nextLine();
                     }
