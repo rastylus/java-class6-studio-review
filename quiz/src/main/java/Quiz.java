@@ -34,18 +34,10 @@ public class Quiz {
             // Print question and choices for user
             System.out.println(question);
 
-            // Determine number of correct answer(s)
-            int numPossible = 0;
-            for (Choice choice : question.getChoiceMap().values()) {
-                if (choice.isCorrect()) {
-                    numPossible++;
-                }
-            }
-
             // Get actual response(s) from user & evaluate
             ArrayList<Integer> userResponses = new ArrayList<>();
             int i = 0;
-            while (i < numPossible) {
+            while (i < question.getMaxResponses()) {
                 String userResponse;
 
                 // Validate
@@ -69,7 +61,7 @@ public class Quiz {
                 } else {
                     System.out.println("Correct!");
                     userResponses.add(userRespNum);
-                    if (i == numPossible - 1) {
+                    if (i == question.getMaxResponses() - 1) {
                         numCorrect++;
                     }
                     i++;

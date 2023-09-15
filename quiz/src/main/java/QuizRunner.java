@@ -2,9 +2,12 @@ import questions.*;
 
 public class QuizRunner {
 
+    // Create quiz
     private static final Quiz quiz = new Quiz();
 
     public static void main(String[] args) {
+
+        // Create questions
 
         String q1 = "Which of the following are books by Jane Austen?";
         Choice[] q1Choices = new Choice[] {
@@ -31,8 +34,14 @@ public class QuizRunner {
         };
         MultipleChoice question3 = new MultipleChoice(q3, q3Choices);
 
+
+        // Add questions to quiz
+
         quiz.addQuestions(new Question[] { question1, question2, question3 });
 
+
+        // Interact with user (run quiz, give score)
+        
         quiz.run();
 
         String newline = System.lineSeparator();

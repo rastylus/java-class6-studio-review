@@ -8,12 +8,15 @@ public abstract class Question {
 
     private final String question;
     private final HashMap<Integer, Choice> choiceMap = new HashMap<>();
+    private int maxResponses = 1;
 
+    // For questions with choices
     public Question(String question, Choice[] choiceArray) {
         this.question = question;
         createRandomizedChoiceMap(choiceArray);
     }
 
+    // For questions without choices
     public Question(String question) {
         this.question = question;
     }
@@ -24,6 +27,14 @@ public abstract class Question {
 
     public HashMap<Integer, Choice> getChoiceMap() {
         return choiceMap;
+    }
+
+    public int getMaxResponses() {
+        return maxResponses;
+    }
+
+    public void setMaxResponses(int maxResponses) {
+        this.maxResponses = maxResponses;
     }
 
     @Override

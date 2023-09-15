@@ -13,5 +13,4 @@ public class MultipleChoice extends Question {
                 getQuestion() + newline +
                 getFormattedChoices();
     }
-
 }

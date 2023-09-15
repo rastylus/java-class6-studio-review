@@ -1,4 +1,4 @@
-import questions.Question;
+import questions.*;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -25,14 +25,32 @@ public class Survey {
         Scanner input = new Scanner(System.in);
 
         for (Question question : questions) {
+            int i=0;
             System.out.println(question);
-            String userResponse = input.nextLine();
-            while (question.isInvalid(userResponse)) {
-                System.out.println(System.lineSeparator() + "That response is invalid. Please try again: ");
-                userResponse = input.nextLine();
-            }
-            System.out.println("Got it!");
-            userResponses.add(userResponse);
+            do {
+                String userResponse = input.nextLine();
+                if (userResponse.equalsIgnoreCase("done")) {
+                    break;
+                } else {
+                    while (!userResponse.equalsIgnoreCase("done") && question.isInvalid(userResponse)) {
+                        System.out.println(System.lineSeparator() + "That response is invalid. Please try again: ");
+                        userResponse = input.nextLine();
+                    }
+                    System.out.println("Got it!");
+
+                    if (question instanceof ShortAnswer || question instanceof Paragraph || question instanceof LinearScale) {
+                        userResponses.add(userResponse);
+                    } else {
+                        int userRespNum = Integer.parseInt(userResponse);
+                        userResponses.add(question.getChoiceMap().get(userRespNum).getContent());
+                    }
+                    i++;
+
+                    if (question instanceof Checkbox && i < question.getMaxResponses()) {
+                        System.out.println("(Select another by number or enter DONE)");
+                    }
+                }
+            } while (i < question.getMaxResponses());
         }
         input.close();
     }
