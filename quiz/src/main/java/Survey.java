@@ -36,7 +36,7 @@ public class Survey extends Quiz {
                         int userRespNum = Integer.parseInt(userResponse);
                         content = question.getChoiceMap().get(userRespNum).getContent();
                     }
-                    String resp = question.getQuestion() + ": " + content;
+                    String resp = question.getQuestion() + " " + content;
                     allResponses.add(resp);
                     i++;
 

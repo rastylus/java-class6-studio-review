@@ -52,7 +52,7 @@ public class SurveyRunner {
         survey.run();
 
         System.out.println(newline + "Thank you! Your preferences have been noted for the upcoming event:" +
-                newline + "\t" + String.join(newline, survey.getAllResponses()) + newline);
+                newline + "\t- " + String.join(newline + "\t- ", survey.getAllResponses()) + newline);
 
     }
 }
